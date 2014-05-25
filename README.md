@@ -4,12 +4,7 @@ Jibe keeps simple data 'n sync with very little setup. For now, it relies on Pus
 
 ## Installation
 
-First, Add this line to your application's Gemfile:
-
-```
-gem 'jibe'
-bundle
-```
+First, Add `gem 'jibe'` to your application's Gemfile and `bundle`.
 
 Then, [Set up Pusher.](https://github.com/pusher/pusher-gem) You'll also need to throw your pusher key into a meta tag named `pusher-key`.
 
@@ -23,7 +18,7 @@ class Comment < ActiveRecord::Base
 end
 ```
 
-Replace a render call:
+Replace a collection render call:
 
 ```
 <table>
@@ -31,7 +26,7 @@ Replace a render call:
 </table>
 ```
 
-turns into:
+with:
 
 ```
 <table>
