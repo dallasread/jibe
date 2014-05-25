@@ -30,9 +30,10 @@ module Jibe
       
         data[:restrict_to] = data[:restrict_to].join(",")
       end
-    
+      
+      data[:silent] = true if args.first.nil?
       html = content_tag :script, nil, type: "x-jibe", data: data
-      html += render *args
+      html += render *args unless args.first.nil?
       html.html_safe
     end
   end
