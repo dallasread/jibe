@@ -10,12 +10,12 @@ module Jibe
     
       strategy = "append" if strategy.blank?
       resource = "#{args.first.first.class.name}".downcase.pluralize
-      data = { 
-        strategy: strategy, 
-        resource: resource,
-        scope: scope,
-        silent: silent
-      }
+
+      data = {}
+      data[:resource] = resource
+      data[:strategy] = strategy
+      data[:scope] = scope if scope
+      data[:silent] = silent if silent
     
       if restrict_to
         data[:restrict_to] = []

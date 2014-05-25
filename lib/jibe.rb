@@ -41,6 +41,7 @@ module Jibe
               partial: Jibe::Render.new.to_string(self),
               data: jibe_data
             })
+            logger.info "\033[0;34mJibing #{model} #{action_name}...\033[0m"
           end
         end
       end
