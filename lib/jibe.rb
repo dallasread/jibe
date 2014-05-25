@@ -1,5 +1,5 @@
 require "jibe/version"
-require "jibe/railtie" if defined?(Rails::Railtie)
+require "jibe/railtie" if defined? Rails
 
 module Jibe
   mattr_accessor :director
