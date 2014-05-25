@@ -34,7 +34,6 @@ module Jibe
             Pusher["Jibe"].trigger("event", {
               action_name: action_name,
               action_capitalized: action_name.capitalize,
-              folder_id: folder_id,
               id: id,
               collection: self.class.name.downcase.pluralize,
               model: model,

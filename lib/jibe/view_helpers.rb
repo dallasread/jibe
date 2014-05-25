@@ -4,6 +4,7 @@ module Jibe
       if args.try(:last).is_a? Hash
         strategy = args.try(:last)[:strategy]
         scope = args.try(:last)[:scope]
+        silent = args.try(:last)[:silent]
         restrict_to = args.try(:last)[:restrict_to]
       end
     
@@ -12,7 +13,8 @@ module Jibe
       data = { 
         strategy: strategy, 
         resource: resource,
-        scope: scope
+        scope: scope,
+        silent: silent
       }
     
       if restrict_to

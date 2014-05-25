@@ -43,7 +43,8 @@ Now, all those `@comments` will stay in sync. At this point, its probably worth 
   jibe @comments, 
     strategy: "prepend", # by default, new tasks are appended
     scope: "completed", # useful in conjunction with JS callbacks
-    restrict_to: [@folder, current_user] # limit access
+    restrict_to: [@folder, current_user], # limit access
+    silent: true # don't change the page
 %>
 ```
 

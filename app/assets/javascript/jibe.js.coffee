@@ -27,20 +27,20 @@ Jibe.init = ->
 				
 				if has_events && typeof Jibe.events[data.collection][before_hook_name] == "function"
 					Jibe.events[data.collection][before_hook_name].call null, partial, data.data, scope
-
-				if data.action_name == "create"
-					if $(this).data("strategy") == "prepend"
-						partial.prependTo wrapper
-					else
-						partial.appendTo wrapper
-				else if data.action_name == "update"
-					on_page.replaceWith partial
+				
+				if typeof $(this).data("silent") == "undefined"
+					if data.action_name == "create"
+						if $(this).data("strategy") == "prepend"
+							partial.prependTo wrapper
+						else
+							partial.appendTo wrapper
+					else if data.action_name == "update"
+						on_page.replaceWith partial
+					else if data.action_name == "destroy"
+						on_page.remove()
 				
 				if has_events && typeof Jibe.events[data.collection][after_hook_name] == "function"
 					Jibe.events[data.collection][after_hook_name].call null, partial, data.data, scope
-				
-				if data.action_name == "destroy"
-					on_page.remove()
 
 $ ->
 	Jibe.init()
