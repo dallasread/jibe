@@ -4,18 +4,18 @@ Jibe keeps simple data 'n sync with very little setup. For now, it relies on Pus
 
 ## Installation
 
-1. Add this line to your application's Gemfile:
+First, Add this line to your application's Gemfile:
 
 ```
 gem 'jibe'
 bundle
 ```
 
-2. [Set up Pusher.](https://github.com/pusher/pusher-gem) You'll also need to throw your pusher key into a meta tag named `pusher-key`.
+Then, [Set up Pusher.](https://github.com/pusher/pusher-gem) You'll also need to throw your pusher key into a meta tag named `pusher-key`.
 
-3. Add `//= require jibe` to your `application.js` file.
+Add `//= require jibe` to your `application.js` file.
 
-4. Add `jibe` to your model.
+Add `jibe` to your model.
 
 ```
 class Comment < ActiveRecord::Base
@@ -23,7 +23,7 @@ class Comment < ActiveRecord::Base
 end
 ```
 
-4. Replace a render call:
+Replace a render call:
 
 ```
 <table>
@@ -39,7 +39,7 @@ turns into:
 </table>
 ```
 
-5. Now, all those `@comments` will stay in sync. At this point, its probably worth adding `remote: true` to your forms.
+Now, all those `@comments` will stay in sync. At this point, its probably worth adding `remote: true` to your forms.
 
 ## Options
 
