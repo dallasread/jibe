@@ -6,11 +6,21 @@ Jibe keeps simple data 'n sync with very little setup. For now, it relies on Pus
 
 First, Add `gem 'jibe'` to your application's Gemfile and `bundle`.
 
-Then, [Set up Pusher.](https://github.com/pusher/pusher-gem) You'll also need to throw your pusher key into a meta tag named `pusher-key`.
+Then, [Set up Pusher.](https://github.com/pusher/pusher-gem)
+
+You'll need to throw your pusher key into a meta tag named `pusher-key`:
+
+```
+<%= tag :meta, name: "pusher-key", content: CONFIG["pusher_key"] %>
+```
 
 Add `//= require jibe` to your `application.js` file.
 
-Add `jibe` to your model.
+
+## Usage
+
+With only 2 1-word tweaks, your views will stay in sync!
+Add `jibe` to the model you'd like to stay in sync. In our case, `app/models/comment.rb`.
 
 ```
 class Comment < ActiveRecord::Base
@@ -18,7 +28,7 @@ class Comment < ActiveRecord::Base
 end
 ```
 
-Replace a collection render call:
+Replace a collection render call. In our case, its in `app/views/comments/index.html.erb`.
 
 ```
 <table>
@@ -26,7 +36,7 @@ Replace a collection render call:
 </table>
 ```
 
-with:
+should be replaced with:
 
 ```
 <table>
@@ -41,21 +51,21 @@ Now, all those `@comments` will stay in sync. At this point, its probably worth 
 ```
 <%=
   jibe @comments, 
-    strategy: "prepend", # by default, new tasks are appended
-    scope: "completed", # useful in conjunction with JS callbacks
-    restrict_to: [@folder, current_user], # limit access
-    silent: true # don't change the page
+    strategy: "append", # where should jibe place new records (prepend/append)
+    scope: [@post, "completed"], # checks AR objects against *_id attrs, strings are useful in conjunction with JS callbacks
+    silent: true # don't manipulate the DOM
 %>
 ```
 
-You can hijack the `beforeCreate`, `afterCreate`, `beforeUpdate`, `afterUpdate`, `beforeDestroy`, `afterDestroy` events. This is helpful for transitions.
+You can control the way the DOM is updated by using the `beforeCreate`, `afterCreate`, `beforeUpdate`, `afterUpdate`, `beforeDestroy`, `afterDestroy` events. This is helpful for transitions.
 
 ```
 Jibe.events["comments"] =
 	beforeCreate: (partial, data, scope) ->
     # partial = the DOM node
     # data = the model's attributes (override with jibe_data method in your model)
-    # scope = an optional scope based on the jibe tag in your view
+    # scope = based on the jibe tag in your view
+    # Jibe.inScope("completed", scope) is useful to check if the record is within the scope
     
 ```
 

@@ -31,7 +31,7 @@ module Jibe
         unless skip_jibe
           if Jibe.director == :pusher
             model = self.class.name.downcase
-            Pusher["Jibe"].trigger("event", {
+            Pusher["jibe"].trigger("event", {
               action_name: action_name,
               action_capitalized: action_name.capitalize,
               id: id,

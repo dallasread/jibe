@@ -6,29 +6,31 @@ module Jibe
         scope = args.try(:last)[:scope]
         silent = args.try(:last)[:silent]
         restrict_to = args.try(:last)[:restrict_to]
+        partial = args.try(:partial)
       end
-    
-      strategy = "append" if strategy.blank?
-      resource = "#{args.first.first.class.name}".downcase.pluralize
+
+      resource = "#{args.first.class.to_s.split("::").first}".downcase.pluralize
 
       data = {}
       data[:resource] = resource
-      data[:strategy] = strategy
-      data[:scope] = scope if scope
+      data[:strategy] = strategy if strategy
       data[:silent] = silent if silent
-    
-      if restrict_to
-        data[:restrict_to] = []
       
-        if restrict_to.is_a? Array
-          restrict_to.each do |restrict|
-            data[:restrict_to].push "#{restrict.class.name.downcase}-#{restrict.id}"
+      if scope
+        if scope.is_a? Array
+          scopes = []
+          
+          scope.each do |s|
+            s = "#{s.class.name.downcase}_id=#{s.id}" unless s.is_a? String
+            scopes.push s
           end
+          
+          data[:scope] = scopes.join(" ")
+        elsif scope.is_a? Object
+          data[:scope] = "#{scope.class.name.downcase}_id=#{scope.id}"
         else
-          data[:restrict_to].push "#{restrict_to.class.name.downcase}-#{restrict_to.id}"
+          data[:scope] = scope
         end
-      
-        data[:restrict_to] = data[:restrict_to].join(",")
       end
       
       data[:silent] = true if args.first.nil?
