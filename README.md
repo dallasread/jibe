@@ -4,6 +4,8 @@ Jibe keeps simple data 'n sync with very little setup. For now, it relies on Pus
 
 ## Installation
 
+Looking for a quick video of what Jibe can do? [http://youtu.be/KbFczIFprts](http://youtu.be/KbFczIFprts)
+
 First, Add `gem 'jibe'` to your application's Gemfile and `bundle`.
 
 Then, [Set up Pusher.](https://github.com/pusher/pusher-gem)

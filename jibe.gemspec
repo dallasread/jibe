@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["dallas@excitereative.ca"]
   spec.summary       = %q{Jibe keeps all your data 'n sync!}
   spec.description   = %q{Jibe keeps your pages live - with almost no effort!}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/dallasread/jibe"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
