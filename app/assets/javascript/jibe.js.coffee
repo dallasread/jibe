@@ -20,7 +20,7 @@ Jibe.compareScopeWithData = (scope, data) ->
 		$.each scope, (index, s) ->
 			s_split = s.split("=")
 			if s_split.length
-				if "#{data.data[s_split[0]]}" == "#{s_split[1]}" || "#{data.data.data[s_split[0]]}" == "#{s_split[1]}"
+				if "#{data.data[s_split[0]]}" == "#{s_split[1]}"
 					scope_passes += 1
 			else
 				scope_passes += 1

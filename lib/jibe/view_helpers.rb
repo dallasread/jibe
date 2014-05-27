@@ -9,7 +9,11 @@ module Jibe
         partial = args.try(:partial)
       end
 
-      resource = "#{args.first.class.to_s.split("::").first}".downcase.pluralize
+      begin
+        resource = args.first.table_name
+      rescue
+        resource = args.first.first.class.name.downcase.pluralize
+      end
 
       data = {}
       data[:resource] = resource
