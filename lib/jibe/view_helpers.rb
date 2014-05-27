@@ -8,11 +8,15 @@ module Jibe
         restrict_to = args.try(:last)[:restrict_to]
         partial = args.try(:partial)
       end
-
-      begin
-        resource = args.first.table_name
-      rescue
-        resource = args.first.first.class.name.downcase.pluralize
+      
+      if args.first.is_a? String
+        resource = args.first
+      else
+        begin
+          resource = args.first.table_name
+        rescue
+          resource = args.first.first.class.name.downcase.pluralize
+        end
       end
 
       data = {}
@@ -39,7 +43,7 @@ module Jibe
       
       data[:silent] = true if args.first.nil?
       html = content_tag :script, nil, type: "x-jibe", data: data
-      html += render *args unless args.first.nil?
+      html += render *args if !args.first.nil? && !args.first.is_a?(String)
       html.html_safe
     end
   end
